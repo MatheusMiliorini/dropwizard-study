@@ -1,0 +1,15 @@
+server:
+  applicationConnectors:
+    - type: http
+      port: 9000
+  adminConnectors:
+    - type: http
+      port: 9001
+
+logging:
+  level: INFO
+  loggers:
+    ml.miliorini.studies: DEBUG
+
+swagger:
+  resourcePackage: ml.miliorini.studies.resources
