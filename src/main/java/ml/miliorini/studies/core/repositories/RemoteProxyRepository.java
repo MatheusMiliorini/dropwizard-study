@@ -51,4 +51,8 @@ public class RemoteProxyRepository implements IProxyRepository {
             logger.info("{} proxies found", proxyList.size());
         }
     }
+
+    public String getProxyUrl() {
+        return proxyUrl;
+    }
 }

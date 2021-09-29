@@ -75,7 +75,7 @@ public class ProxyService implements IProxyService {
     private boolean isProxyWorking(Proxy proxy) {
         boolean isWorking = false;
         try {
-            HttpResponse<String> response = http.get("http://meuip.com/api/meuip.php", proxy, 30);
+            HttpResponse<String> response = http.get("http://example.org/", proxy, 30);
             if (response.statusCode() == 200) {
                 isWorking = true;
             }

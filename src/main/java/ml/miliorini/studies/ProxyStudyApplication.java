@@ -5,7 +5,7 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
-import ml.miliorini.studies.resources.ProxyResource;
+import ru.vyarus.dropwizard.guice.GuiceBundle;
 
 public class ProxyStudyApplication extends Application<ProxyStudyConfiguration> {
 
@@ -15,6 +15,11 @@ public class ProxyStudyApplication extends Application<ProxyStudyConfiguration> 
 
     @Override
     public void initialize(final Bootstrap<ProxyStudyConfiguration> bootstrap) {
+        bootstrap.addBundle(GuiceBundle.builder()
+                .enableAutoConfig(getClass().getPackage().getName())
+                .modules(new AppModule())
+                .build());
+
         bootstrap.addBundle(new SwaggerBundle<>() {
             @Override
             protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(ProxyStudyConfiguration configuration) {
@@ -26,11 +31,6 @@ public class ProxyStudyApplication extends Application<ProxyStudyConfiguration> 
     @Override
     public void run(final ProxyStudyConfiguration configuration,
                     final Environment environment) {
-        // Dependency Injection
-        final DependencyInjectionBundle dependencyInjectionBundle = new DependencyInjectionBundle();
-        dependencyInjectionBundle.run(configuration, environment);
-        // Resources register
-        environment.jersey().register(ProxyResource.class);
     }
 
 }
