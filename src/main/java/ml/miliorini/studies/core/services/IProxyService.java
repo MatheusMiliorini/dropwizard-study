@@ -9,4 +9,6 @@ public interface IProxyService {
     List<Proxy> list();
 
     Proxy findWorkingProxy();
+
+    List<Proxy> testAllProxies();
 }

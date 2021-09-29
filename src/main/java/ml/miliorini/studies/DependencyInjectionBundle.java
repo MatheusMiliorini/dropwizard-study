@@ -5,6 +5,7 @@ import io.dropwizard.setup.Environment;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
 import javax.inject.Singleton;
+import java.util.Map;
 
 public class DependencyInjectionBundle implements ConfiguredBundle<ProxyStudyConfiguration> {
 
@@ -17,8 +18,8 @@ public class DependencyInjectionBundle implements ConfiguredBundle<ProxyStudyCon
                         for (Class<?> singletonClass : configuration.getSingletons()) {
                             bindAsContract(singletonClass).in(Singleton.class);
                         }
-                        for (Binding binding : configuration.getBindings()) {
-                            bind(binding.getImpl()).to(binding.getItf());
+                        for (Map.Entry<Class<?>, Class<?>> binding : configuration.getBindings().entrySet()) {
+                            bind(binding.getKey()).to(binding.getValue());
                         }
                     }
                 }

@@ -39,4 +39,11 @@ public class ProxyResource {
     public Proxy findWorkingProxy() {
         return this.proxyService.findWorkingProxy();
     }
+
+    @GET
+    @Path("test-all")
+    @ApiOperation("Test all proxies")
+    public List<Proxy> testAllProxies() {
+        return this.proxyService.testAllProxies();
+    }
 }

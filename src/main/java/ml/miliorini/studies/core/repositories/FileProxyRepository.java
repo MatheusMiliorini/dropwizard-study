@@ -11,12 +11,11 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-public class ProxyRepository implements IProxyRepository {
+public class FileProxyRepository implements IProxyRepository {
 
     private static List<Proxy> proxyList = new ArrayList<>();
-    private final Logger logger = LoggerFactory.getLogger(ProxyRepository.class);
+    private static final Logger logger = LoggerFactory.getLogger(FileProxyRepository.class);
 
     @Override
     public List<Proxy> list() {
@@ -36,12 +35,6 @@ public class ProxyRepository implements IProxyRepository {
             }
         }
         return proxyList;
-    }
-
-    @Override
-    public Proxy getRandomProxy() {
-        List<Proxy> proxyList = this.list();
-        return proxyList.get(new Random().nextInt(proxyList.size()));
     }
 
     @Override
